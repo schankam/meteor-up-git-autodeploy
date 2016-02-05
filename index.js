@@ -83,7 +83,7 @@ function deployProject() {
 }
 
 app.post('/deploy', function (req, res) {
-  if (!req.query.token || (req.query.token !== 'sadnjklN54saaskqqqAad41Nskjnas_sd5q4DS!')) {
+  if (program.token && (!req.query.token || (req.query.token !== program.token))) {
     return res.sendStatus(403);
   } else {
     res.sendStatus(200);
@@ -121,6 +121,7 @@ function onMupAutoDeployLog(logTxt) {
 program
   .version('0.0.1')
   .arguments('<git-url>')
+  .option('-t --token <secret-token>', 'application access token')
   .option('-p, --port <port-number>', 'port to listen')
   .option('-v, --verbose', 'display deployment information on standard output')
   .option('-s, --slack <slack-hook-url>', 'send log to the given <slack-hook-url>')
