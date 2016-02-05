@@ -126,7 +126,7 @@ program
   .option('-v, --verbose', 'display deployment information on standard output')
   .option('-s, --slack <slack-hook-url>', 'send log to the given <slack-hook-url>')
   .action(function (gitUrl) {
-    var port = program.port || 8532;
+    var port = program.port || 80;
     program.gitUrl = gitUrl;
     mupAutoDeployEmitter.on('log', onMupAutoDeployLog);
     if (program.slack) {
