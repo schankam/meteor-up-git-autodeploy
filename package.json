@@ -1,0 +1,33 @@
+{
+  "name": "meteor-up-git-autodeploy",
+  "version": "0.0.1",
+  "description": "A command line utility to automate meteor application deployment using Meteor Up and Git",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schankam/meteor-up-git-autodeploy.git"
+  },
+  "keywords": [
+    "meteor",
+    "meteor up",
+    "deployment",
+    "automation",
+    "git"
+  ],
+  "author": "Stéphane CHAN-KAM",
+  "license": "ISC",
+  "bin": {
+    "muga": "./index.js"
+  },  
+  "bugs": {
+    "url": "https://github.com/schankam/meteor-up-git-autodeploy/issues"
+  },
+  "homepage": "https://github.com/schankam/meteor-up-git-autodeploy#readme",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "express": "^4.13.3"
+  }
+}
