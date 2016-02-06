@@ -10,7 +10,7 @@ Because we are using **Meteor Up** to deploy the application, we assume that you
 
 Please note that you **MUST** place a [mup.json](https://github.com/arunoda/meteor-up/blob/master/example/mup.json) file in the directory where you will run `muga`.
 
-You can find more information about Meteor Up setup this in their [documentation](https://github.com/arunoda/meteor-up).
+You can find more information about Meteor Up configuration in their [documentation](https://github.com/arunoda/meteor-up).
 
 ### Git
 
