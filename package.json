@@ -1,6 +1,6 @@
 {
   "name": "meteor-up-git-autodeploy",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A command line utility to automate meteor application deployment using Meteor Up and Git",
   "main": "index.js",
   "scripts": {

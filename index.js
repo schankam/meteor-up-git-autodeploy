@@ -90,19 +90,32 @@ app.post('/deploy', function (req, res) {
     emitLog('Deployment triggered!');
     var projectNameStartingIndex = program.gitUrl.lastIndexOf('/') + 1;
     var projectNameEndingIndex = program.gitUrl.lastIndexOf('.git');
+    var branch = program.branch || 'master';
     var projectName = program.gitUrl.substr(projectNameStartingIndex, projectNameEndingIndex - projectNameStartingIndex);
     locationExists(projectName).then(function (exists) {
       if (!exists) {
         emitLog('Project has not been cloned yet. Cloning....');
         executeCommand('git', ['clone', program.gitUrl]).then(function (stdout) {
           emitLog(stdout);
-          deployProject();
+          emitLog('Done cloning');
+          emitLog('Checking out branch ' + branch + '....');
+          executeCommand('git', ['-C', projectName, 'checkout', 'origin/' + branch]).then(function () {
+            emitLog(stdout);
+            emitLog('Checked out branch ' + branch);
+            deployProject();
+          }, commandError);
         }, commandError);
       } else {
-        emitLog('Pulling changes...');
-        executeCommand('git', ['-C', projectName, 'pull']).then(function (stdout) {
+        emitLog('Checking out branch ' + branch + '....');
+        executeCommand('git', ['-C', projectName, 'checkout', 'origin/' + branch]).then(function (stdout) {
           emitLog(stdout);
-          deployProject();
+          emitLog('Checked out branch ' + branch);
+          emitLog('Pulling changes...');
+          executeCommand('git', ['-C', projectName, 'pull', 'origin', branch]).then(function () {
+            emitLog(stdout);
+            emitLog('Pulled changes');
+            deployProject();
+          }, commandError);
         }, commandError);
       }
     });
@@ -123,6 +136,7 @@ program
   .arguments('<git-url>')
   .option('-t --token <secret-token>', 'application access token')
   .option('-p, --port <port-number>', 'port to listen')
+  .option('-b, --branch <branch-name>', 'branch to checkout')
   .option('-v, --verbose', 'display deployment information on standard output')
   .option('-s, --slack <slack-hook-url>', 'send log to the given <slack-hook-url>')
   .action(function (gitUrl) {

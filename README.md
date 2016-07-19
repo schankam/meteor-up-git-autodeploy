@@ -42,6 +42,10 @@ To see a list of all available options, just run `muga` without any argument or 
 
 By default, `muga` is listening on the port 80. You can change this behavior by using the `-p <port>` option.
 
+### Git branch
+
+By default, `muga` assumes the master branch is what you want to deploy. You can specify the branch to deploy by using the `-b <branch>` option. Note that the branch is automatically prefixed with `origin/`, such that providing `-b dev` will checkout `origin/dev`.
+
 ### Verbose
 
 `muga` is a quiet tool, but if you want it to talk more, just use the `-v` option and it will output all the log on the standard output.
